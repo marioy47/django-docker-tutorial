@@ -32,11 +32,11 @@ RUN apk add --update --no-cache --virtual .tmp \
     )" \
     && apk add --virtual .rundeps $runDeps \
     && apk del .tmp \
-    && adduser -D django 
+    && adduser -D django
 
 
 USER django
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]
 CMD ["uwsgi", "--http", "0.0.0.0:8080", "--master", "--enable-threads", "--module", "config.wsgi"]
 
